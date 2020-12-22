@@ -14,6 +14,7 @@ gem 'webpacker', '~> 4.0'
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'rspec-rails'
 end
 
 group :development do
