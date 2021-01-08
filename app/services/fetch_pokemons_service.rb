@@ -2,7 +2,7 @@ require 'poke-api-v2'
 
 class FetchPokemonsService
 
-  def initialize(pokemons)
+  def initialize(pokemons = {})
     @sending = pokemons.dig(:sending)
     @receiving = pokemons.dig(:receiving)
     @unknown_list = []
