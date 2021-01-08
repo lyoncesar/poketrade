@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe TradeContract do
   let(:params) do
     {
-      sending: ['Pikachu'],
-      receiving: ['Charmander']
+      sending: [{ name: 'Pikachu'}],
+      receiving: [{ name: 'Charmander'}]
     }
   end
 
@@ -13,20 +13,20 @@ RSpec.describe TradeContract do
 
     expect(contract.call(params).to_h).to match(
       {
-        sending: ["Pikachu"],
-        receiving: ["Charmander"]
+        sending: [{ name: "Pikachu"}],
+        receiving: [{ name: "Charmander"}]
       }
     )
   end
 
   it 'return an error message caused by a invalid param' do
     params[:sending].push(
-      "Farfetch'd",
-      "Sandaconda",
-      "Charmander",
-      "Wooloo",
-      "Nidoking",
-      "Venomoth"
+      { name: "Farfetch'd" },
+      { name: "Sandaconda" },
+      { name: "Charmander" },
+      { name: "Wooloo" },
+      { name: "Nidoking" },
+      { name: "Venomoth" }
     )
 
     contract = described_class.new
@@ -43,7 +43,24 @@ RSpec.describe TradeContract do
     contract = described_class.new
 
     expect(contract.call(params).errors.to_h).to eq(
-      { sending: ["must be filled"] }
+      { sending: ["size cannot be less than 1"] }
     )
+  end
+
+  context 'when a pokemon name have special characters' do
+    it 'return the name without the special character' do
+      params[:sending] << { name: "Farfetch'd" }
+      contract = described_class.new
+
+      expect(contract.call(params).to_h).to eq(
+        {
+          sending: [
+            { name: "Pikachu"},
+            { name: "Farfetch'd"}
+          ],
+          receiving: [{ name: "Charmander"}]
+        }
+      )
+    end
   end
 end
