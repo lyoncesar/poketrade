@@ -4,20 +4,20 @@ RSpec.describe FetchPokemonsService do
   let(:pokemons) do
     {
       sending: [
-        "Farfetch'd",
-        "Pikachu",
-        "Charmander",
-        "Wooloo",
-        "Nidoking",
-        "Venomoth"
+        { name: "Farfetch'd" },
+        { name: "Pikachu" },
+        { name: "Charmander" },
+        { name: "Wooloo" },
+        { name: "Nidoking" },
+        { name: "Venomoth" }
       ],
       receiving: [
-        "Pikachu",
-        "Charmander",
-        "Sandaconda",
-        "Zubat",
-        "Alakazam",
-        "Drowzee"
+        { name: "Pikachu" },
+        { name: "Charmander" },
+        { name: "Sandaconda" },
+        { name: "Zubat" },
+        { name: "Alakazam" },
+        { name: "Drowzee" }
       ]
     }
   end
@@ -66,12 +66,12 @@ RSpec.describe FetchPokemonsService do
       let(:pokemons) do
         {
           sending: [
-            "Unknown",
-            "Pikachu"
+            { name: "Unknown" },
+            { name: "Pikachu" }
           ],
           receiving: [
-            "Charmander",
-            "Unknown Pokemon"
+            { name: "Charmander" },
+            { name: "Unknown Pokemon" }
           ]
         }
       end
@@ -81,7 +81,7 @@ RSpec.describe FetchPokemonsService do
 
         expect(service.updated_receive).to eq( [{ base_experience: 62, pokemon: "charmander" }] )
         expect(service.updated_send).to eq( [{ base_experience: 112, pokemon: "pikachu" }] )
-        expect(service.unknown_pokemons).to eq( ["Unknown Pokemon", "Unknown"] )
+        expect(service.unknown_pokemons).to eq( [{ name: "Unknown Pokemon" }, { name: "Unknown"}] )
       end
     end
   end

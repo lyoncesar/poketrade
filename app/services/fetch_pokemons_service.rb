@@ -36,11 +36,11 @@ class FetchPokemonsService
   end
 
   def fetch_pokemons(poke_list)
-    poke_list.map do |name|
-      pokemon = poke_api_get(name)
+    poke_list.map do |item|
+      pokemon = poke_api_get(item[:name])
 
       if pokemon.blank?
-        @unknown_list << name unless @unknown_list.include?(name)
+        @unknown_list << item unless @unknown_list.include?(item)
         next
       end
 
@@ -53,7 +53,7 @@ class FetchPokemonsService
 
   def poke_api_get(name)
     begin
-      PokeApi.get(pokemon: name.sub(/[$'$.]/, '').downcase.tr(' ', '-'))
+      PokeApi.get(pokemon: name.sub(/[^a-zA-Z0-9]/, '').downcase.tr(' ', '-'))
     rescue URI::InvalidURIError, JSON::ParserError
       return
     end
