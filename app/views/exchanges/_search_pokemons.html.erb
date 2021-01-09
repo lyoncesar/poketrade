@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row align-items-center">
+    <span style="display: none" class="alert alert- analising align-self-center">Analising..</span>
+    <span style="display: none" class="alert alert-success">Teste</span>
+    <span style="display: none" class="alert alert-warning">Message</span>
+    <span style="display: none" class="alert alert-danger">Teste</span>
+  </div>
+
+  <%= form_with model: @exchange do |form| %>
+    <div class="row row-cols-auto justify-content-center">
+      <div class="col-6">
+        <span>Wich pokemons you are offering</span>
+        <% 6.times do |n| %>
+          <div class="g-3 align-items-center">
+            <div class='col-auto'>
+              <%= form.text_field "sending", placeholder:"Pokemon name #{n + 1}", multiple: true, class:'form-control sending' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-6">
+        <span>Wich pokemons you expect receive</span>
+        <% 6.times do |n| %>
+          <div class="g-3 align-items-center">
+            <div class="col-auto">
+              <%= form.text_field "receiving", placeholder:"Pokemon name #{n + 1}", multiple: true, class:'form-control receiving' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>  
+
+    <div class="row">
+      <p class='btn btn-link'>validate</p>
+      <%= form.submit "save", class:'btn btn-primary', style:'display: none' %>
+    </div>
+  <% end %>
+</div>

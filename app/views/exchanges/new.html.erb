@@ -1,13 +1,9 @@
-<h1>Teste</h1>
-
-<%= form_for @exchange do |f| %>
-  <div>
-    <span>Write the Pokemons names that you are offering</span>
-    <% 6.times do  %>
-      <%= f.label 'Teste' %>
-      <%= f.text_field :sending %>
-    <% end %>
-    <%= f.button 'Verify', type: 'button' %>
-    <%= f.submit 'Submit' %>
+<div class="container">
+  <div class="">
+    <h1 class="align-self-center">Teste</h1>
   </div>
-<% end %>
+
+  <div>
+    <%= render 'search_pokemons' %>
+  </div>
+</div>
