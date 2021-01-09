@@ -7,7 +7,8 @@ module Api
         contract = TradeContract.new.call(trade_params.to_h)
 
         if contract.errors.blank?
-          @pokemons_list = FetchPokemonsService.new(contract.to_h)
+          adapter = TradeAdapter.new(contract.to_h)
+          @pokemons_list = FetchPokemonsService.new(adapter)
         
           begin
             @trade_report = TradePolicy.new(@pokemons_list).call
@@ -24,7 +25,7 @@ module Api
       private
 
       def trade_params
-        params.require(:data).permit(sending: :name, receiving: :name)
+        params.require(:data).permit(sending: [], receiving: [])
       end
     end
   end

@@ -6,20 +6,20 @@ RSpec.describe 'Api::V1::Trades', type: :request do
       {
         data: {
            sending: [
-              { name: "Farfetch'd" },
-              { name: "Pikachu" },
-              { name: "Charmander" },
-              { name: "Wooloo" },
-              { name: "Nidoking" },
-              { name: "Venomoth" }
+              "Farfetch'd",
+              "Pikachu",
+              "Charmander",
+              "Wooloo",
+              "Nidoking",
+              "Venomoth"
           ],
           receiving: [
-              { name: "Pikachu" },
-              { name: "Charmander" },
-              { name: "Sandaconda" },
-              { name: "Zubat" },
-              { name: "Alakazam" },
-              { name: "Drowzee" }
+              "Pikachu",
+              "Charmander",
+              "Sandaconda",
+              "Zubat",
+              "Alakazam",
+              "Drowzee"
           ]
         }  
       }

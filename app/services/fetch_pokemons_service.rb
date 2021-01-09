@@ -2,9 +2,9 @@ require 'poke-api-v2'
 
 class FetchPokemonsService
 
-  def initialize(pokemons = {})
-    @sending = pokemons.dig(:sending)
-    @receiving = pokemons.dig(:receiving)
+  def initialize(pokemons = TradeAdapter.new)
+    @receiving = pokemons.receiving
+    @sending = pokemons.sending
     @unknown_list = []
   end
 
@@ -36,11 +36,11 @@ class FetchPokemonsService
   end
 
   def fetch_pokemons(poke_list)
-    poke_list.map do |item|
-      pokemon = poke_api_get(item[:name])
+    poke_list.map do |name|
+      pokemon = poke_api_get(name)
 
       if pokemon.blank?
-        @unknown_list << item unless @unknown_list.include?(item)
+        @unknown_list << name unless @unknown_list.include?(name)
         next
       end
 
@@ -53,7 +53,7 @@ class FetchPokemonsService
 
   def poke_api_get(name)
     begin
-      PokeApi.get(pokemon: name.sub(/[^a-zA-Z0-9]/, '').downcase.tr(' ', '-'))
+      PokeApi.get(pokemon: name)
     rescue URI::InvalidURIError, JSON::ParserError
       return
     end

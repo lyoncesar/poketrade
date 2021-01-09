@@ -1,30 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe FetchPokemonsService do
-  let(:pokemons) do
-    {
-      sending: [
-        { name: "Farfetch'd" },
-        { name: "Pikachu" },
-        { name: "Charmander" },
-        { name: "Wooloo" },
-        { name: "Nidoking" },
-        { name: "Venomoth" }
-      ],
-      receiving: [
-        { name: "Pikachu" },
-        { name: "Charmander" },
-        { name: "Sandaconda" },
-        { name: "Zubat" },
-        { name: "Alakazam" },
-        { name: "Drowzee" }
+  let(:sending) do
+      [
+        "farfetchd",
+        "pikachu",
+        "charmander",
+        "wooloo",
+        "nidoking",
+        "venomoth"
       ]
-    }
+  end
+  let(:receiving) do
+    [
+      "pikachu",
+      "charmander",
+      "sandaconda",
+      "zubat",
+      "alakazam",
+      "drowzee"
+    ]
+  end
+
+  let(:adapter) { instance_double(TradeAdapter) }
+
+  before do
+    expect(adapter).to receive(:receiving).and_return(receiving)
+    expect(adapter).to receive(:sending).and_return(sending)
   end
 
   context '#updated_send' do
     it 'return the updated list of sended pokemons' do
-      service = described_class.new(pokemons)
+
+      service = described_class.new(adapter)
       expect(service.updated_send).to eq(
         [
           {base_experience: 132, pokemon:"farfetchd"},
@@ -40,7 +48,7 @@ RSpec.describe FetchPokemonsService do
 
   context '#updated_receive' do
     it 'return the updated list of received pokemons' do
-      service = described_class.new(pokemons)
+      service = described_class.new(adapter)
 
       expect(service.updated_receive).to eq(
         [
@@ -57,31 +65,32 @@ RSpec.describe FetchPokemonsService do
 
   context '#unknown_pokemons' do
     it 'return the updated list of received pokemons' do
-      service = described_class.new(pokemons)
+      service = described_class.new(adapter)
 
       expect(service.unknown_pokemons).to eq([])
     end
 
     context 'when dont find a pokemon' do
-      let(:pokemons) do
-        {
-          sending: [
-            { name: "Unknown" },
-            { name: "Pikachu" }
-          ],
-          receiving: [
-            { name: "Charmander" },
-            { name: "Unknown Pokemon" }
-          ]
-        }
+      let(:sending) do
+        [
+          "unknown",
+          "pikachu"
+        ]
+      end
+      
+      let(:receiving) do
+        [
+          "charmander",
+          "unknown-pokemon"
+        ]
       end
 
       it 'return his name on unknown attribute' do
-        service = described_class.new(pokemons)
+        service = described_class.new(adapter)
 
         expect(service.updated_receive).to eq( [{ base_experience: 62, pokemon: "charmander" }] )
         expect(service.updated_send).to eq( [{ base_experience: 112, pokemon: "pikachu" }] )
-        expect(service.unknown_pokemons).to eq( [{ name: "Unknown Pokemon" }, { name: "Unknown"}] )
+        expect(service.unknown_pokemons).to eq( ["unknown-pokemon", "unknown"] )
       end
     end
   end
