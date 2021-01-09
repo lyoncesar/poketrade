@@ -3,7 +3,7 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: poketrade
-  password: <%= ENV['POKETRADE_DATABASE_PASSWORD_LOCAL'] %>
+  password: password
 
 development:
   <<: *default
