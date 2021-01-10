@@ -58,6 +58,34 @@ RSpec.describe TradePolicy do
     end 
   end
 
+  context 'when none pokemon was found' do
+    let(:trade_unknown_pokemons) { ['unknow', 'unknown_pokemon'] }
+
+    it 'return a list of unknown_pokemons' do
+      trade = instance_double(
+        FetchPokemonsService,
+        :updated_receive => [],
+        :updated_send => [],
+        :unknown_pokemons => trade_unknown_pokemons
+      )
+
+      policy = described_class.new(trade)
+
+      expect(policy.call).to eq(
+        {
+          trade: {
+            sending: [],
+            receiving: []
+          },
+          fair_trade: false,
+          average_xp_send: 0,
+          average_xp_receive: 0,
+          unknown_pokemons: ['unknow', 'unknown_pokemon']
+        }
+      )
+    end
+  end
+
   context 'unfair trade' do
     let(:trade_updated_send) do
       [

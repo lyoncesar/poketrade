@@ -26,15 +26,21 @@ class TradePolicy
 
   # A fair trade consist by the limit until 10 points of diference between xps
   def fair_trade?
+    return false if average_xp_receive.zero? && average_xp_send.zero?
+
     (-10..10).include?(average_xp_send - average_xp_receive)
   end
 
-  def average_xp_send
-    calculate_xp(trade.updated_send) / pokemons_count(trade.updated_send)
+  def average_xp_receive
+    return 0 if trade.updated_receive.blank?
+
+    calculate_xp(trade.updated_receive) / pokemons_count(trade.updated_receive)
   end
 
-  def average_xp_receive
-    calculate_xp(trade.updated_receive) / pokemons_count(trade.updated_receive)
+  def average_xp_send
+    return 0 if trade.updated_send.blank?
+
+    calculate_xp(trade.updated_send) / pokemons_count(trade.updated_send)
   end
 
   def calculate_xp(xp_list)
