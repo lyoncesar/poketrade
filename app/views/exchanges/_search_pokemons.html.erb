@@ -1,22 +1,27 @@
 <div class="container">
   <div class="row align-items-center">
-    <span style="display: none" class="alert alert- analising align-self-center">Analising..</span>
-    <span style="display: none" class="alert alert-success">Teste</span>
-    <span style="display: none" class="alert alert-warning">Message</span>
-    <span style="display: none" class="alert alert-danger">Teste</span>
+    <span class="alert alert-light analising align-self-center display-none">Analising..</span>
+    <span class="alert alert-success display-none">Teste</span>
+    <span class="alert alert-warning empty-list display-none">Message</span>
+    <span class="alert alert-danger display-none">Teste</span>
+    <span class="alert alert-warning unknown-pokemons display-none">Alguns pokemons não foram encontrados</span>
   </div>
 
-  <%= form_with model: @exchange do |form| %>
+  <%= form_for @exchange do |form| %>
     <div class="row row-cols-auto justify-content-center">
       <div class="col-6">
         <span>Wich pokemons you are offering</span>
         <% 6.times do |n| %>
           <div class="g-3 align-items-center">
             <div class='col-auto'>
-              <%= form.text_field "sending", placeholder:"Pokemon name #{n + 1}", multiple: true, class:'form-control sending' %>
+              <div class="">
+                <%= form.text_field "sending", placeholder:"Pokemon name #{n + 1}", multiple: true, class:'form-control sending' %>
+              </div>
             </div>
           </div>
         <% end %>
+
+        <%= form.text_field 'avg_sending', class: 'form-control exchange-avg-sending display-none' %>
       </div>
 
       <div class="col-6">
@@ -28,12 +33,14 @@
             </div>
           </div>
         <% end %>
+
+        <%= form.text_field 'avg_receiving', class: 'form-control display-none' %>
       </div>
     </div>  
 
     <div class="row">
       <p class='btn btn-link'>validate</p>
-      <%= form.submit "save", class:'btn btn-primary', style:'display: none' %>
+      <%= form.submit "save", class:'btn btn-primary display-none' %>
     </div>
   <% end %>
 </div>
