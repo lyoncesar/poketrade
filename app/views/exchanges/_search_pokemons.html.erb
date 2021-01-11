@@ -22,9 +22,11 @@
           </div>
         <% end %>
 
-        <div class='avg-sending display-none'>
-          <%= form.label t('trade.experience'), class: 'form-label avg-sending' %>
-          <%= form.text_field 'avg_sending', class: 'form-control avg-sending' %>
+        <div class='mb-3 row avg-sending display-none d-flex align-items-start'>
+          <%= form.label t('trade.experience'), class: 'avg-sending col-sm-5 col-form-label display-none' %>
+          <div class="col-sm-7">
+            <%= form.text_field 'avg_sending', class: 'form-control-plaintext avg-sending display-none' %>
+          </div>
         </div>
       </div>
 
@@ -39,9 +41,11 @@
           </div>
         <% end %>
 
-        <div class="avg-receiving display-none">
-          <%= form.label t('trade.experience'), class: 'form-label' %>
-          <%= form.text_field 'avg_receiving', class: 'form-control avg-receiving' %>
+        <div class='mb-3 row avg-receiving display-none d-flex align-items-start'>
+          <%= form.label t('trade.experience'), class: 'avg-receiving col-sm-5 col-form-label display-none' %>
+          <div class="col-sm-7">
+            <%= form.text_field 'avg_receiving', class: 'form-control-plaintext avg-receiving display-none' %>
+          </div>
         </div>
       </div>
     </div>  
