@@ -63,4 +63,27 @@ RSpec.describe TradeContract do
       )
     end
   end
+
+  context 'when receive avg_receiving and avg_sending params' do
+    let(:params) do
+      {
+        receiving: ["Charmander"],
+        sending: ["Squirtle"],
+        avg_receiving: "63",
+        avg_sending: "62"
+      }
+    end
+
+    it 'confirm the validation' do
+      contract = described_class.new
+
+      expect(contract.call(params).to_h).to eq(
+        {
+          avg_receiving: "63",
+          avg_sending: "62",
+          receiving: ["Charmander"],
+          sending: ["Squirtle"]
+        })
+    end
+  end
 end

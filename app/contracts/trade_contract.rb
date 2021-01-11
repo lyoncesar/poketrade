@@ -2,6 +2,8 @@ class TradeContract < Dry::Validation::Contract
   params do
     required(:receiving).filled(:array)
     required(:sending).filled(:array)
+    optional(:avg_receiving).value(:string)
+    optional(:avg_sending).value(:string)
   end
 
   rule(:sending) do
