@@ -1,44 +1,77 @@
 $(document).ready(function(){
   fetch_pokemon();
+  cantSave();
 })
+
+function cantSave(){
+  $("input").keydown(function(event) {
+    hideSave();
+  });
+}
+
+function hideSave() {
+  elementHide("span.alert-success");
+  elementHide("input.btn-primary");
+  elementHide("#exchange_avg_receiving");
+  elementHide("#exchange_avg_sending");
+}
+
+function showSave(average_xp_send = '', average_xp_receive = '') {
+  elementShow("span.alert-success");
+  elementShow("input.btn-primary");
+
+  setElementValue('#exchange_avg_sending', average_xp_send);
+  setElementValue('#exchange_avg_receiving', average_xp_receive);
+  elementShow('#exchange_avg_sending');
+  elementShow('#exchange_avg_receiving');
+}
 
 function fetch_pokemon() {
   $(".btn-link").on("click", function(event) {
     toggleMessages();
 
-    const sending =  pokemons_list(".sending");
-    const receiving = pokemons_list(".receiving"); 
+    const sending =  pokemonsList(".sending");
+    const receiving = pokemonsList(".receiving");
 
-    const payload = {
-      "data":{
-        "sending": sending,
-        "receiving": receiving
-      }
-    };
 
     if (sending.length === 0 || receiving.length === 0) {
       elementHide("span.analising");
-      elementShow( "span.alert-warning" );
+      elementShow( "span.empty-list" );
     } else {
-      $.post('/trade_validate', payload, function(response) {
+      $.post('/trade_validate', payload(sending, receiving), function(response) {
         elementHide("span.analising");
-        if (response.data.fair_trade === true) {
-          elementShow("span.alert-success");
-          elementShow("input.btn-primary");
+
+        if(response.data.unknown_pokemons.length === 0) {
+
+          if (response.data.fair_trade === true) {
+            showSave(response.data.average_xp_receive, response.data.average_xp_send);
+          } else {
+            elementShow("span.alert-danger");
+          }
+
         } else {
-          elementShow("span.alert-danger");
+          unknownPokemonsAlert(response.data.unknown_pokemons);
         }
       }, "json");
     }
   });
 }
 
+
 function toggleMessages() {
   elementShow("span.analising");
+
   elementHide("span.alert-success");
   elementHide("span.alert-warning");
   elementHide("span.alert-danger");
+  elementHide("span.unknown-pokemons");
   elementHide("input.btn-primary");
+  elementHide("#exchange_avg_receiving");
+  elementHide("#exchange_avg_sending");
+
+  $("input:text").each(function () {
+    $(this).removeClass("border-danger");
+  });
 }
 
 function elementShow(element) {
@@ -49,11 +82,35 @@ function elementHide(element) {
   $(element).hide('slow');
 }
 
-function pokemons_list(field_list) {
+function pokemonsList(field_list) {
   return $(field_list).map( function() {
       if($(this).val() !== '') {
         return $(this).val();
       }
     }
   ).toArray();
+}
+
+function setElementValue(element, value) {
+  $(element).val(value);
+}
+
+function unknownPokemonsAlert(list) {
+  list.forEach(function(item) {
+    $("input:text").each(function(input) {
+      if ($(this).val().toLowerCase() == item) {
+        $(this).addClass("border-danger");
+        elementShow("span.unknown-pokemons");
+      }
+    })
+  });
+}
+
+function payload(sending, receiving) {
+  return {
+    "data":{
+      "sending": sending,
+      "receiving": receiving
+    }
+  };
 }
