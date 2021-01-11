@@ -16,14 +16,19 @@ function hideSave() {
   elementHide("#exchange_avg_sending");
 }
 
-function showSave(average_xp_send = '', average_xp_receive = '') {
+function showSave(average_xp_receive = '', average_xp_send = '') {
   elementShow("span.alert-success");
   elementShow("input.btn-primary");
 
-  setElementValue('#exchange_avg_sending', average_xp_send);
+  showAverages(average_xp_receive, average_xp_send);
+}
+
+function showAverages(average_xp_receive = '', average_xp_send = '') {
   setElementValue('#exchange_avg_receiving', average_xp_receive);
-  elementShow('#exchange_avg_sending');
+  setElementValue('#exchange_avg_sending', average_xp_send);
+
   elementShow('#exchange_avg_receiving');
+  elementShow('#exchange_avg_sending');
 }
 
 function fetch_pokemon() {
@@ -47,6 +52,7 @@ function fetch_pokemon() {
             showSave(response.data.average_xp_receive, response.data.average_xp_send);
           } else {
             elementShow("span.alert-danger");
+            showAverages(response.data.average_xp_receive, response.data.average_xp_send);
           }
 
         } else {
