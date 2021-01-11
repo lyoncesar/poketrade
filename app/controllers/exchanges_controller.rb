@@ -15,14 +15,22 @@ class ExchangesController < ApplicationController
       @create_trade = CreateTradeService.new(adapter)
 
       if @create_trade.call
-        flash[:success] = "A troca #{@create_trade.trade.id} foi registrada"
+        flash[:success] = I18n.t('flash.persist_success')
         redirect_to exchanges_path(@create_trade.trade)
       else
-        flash.now[:error] = "Não foi possível salvar a troca de pokemons."
+        flash.now[:error] = I18n.t(
+          'errors.messages.model_invalid',
+          errors: @create_trade.errors.messages
+        )
+
         render new_trade_path
       end
     else
-      flash.now[:error] = "Não foi possível salvar a troca de pokemons."
+      flash.now[:error] = I18n.t(
+        'errors.messages.model_invalid',
+        errors: @create_trade.errors.messages
+      )
+
       render new_trade_path
     end
   end

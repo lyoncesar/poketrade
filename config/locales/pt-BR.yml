@@ -146,10 +146,11 @@ pt-BR:
         other: 'Não foi possível gravar %{model}: %{count} erros'
   flash:
     analyzing: 'Analisando..'
-    empty_list: 'Para iniciar a análise é necessário que pelo menos um pokemon seja ofertado por cada lado.'
-    fair_trade: 'Essa troca de pokemons é justa.'
-    not_fair_trade: 'Essa não é uma troca de pokemons justa.'
-    unknown_pokemons: 'Alguns pokemons não foram encontrados.' 
+    empty_list: 'Para iniciar a análise é necessário que pelo menos um pokémon seja ofertado por cada lado.'
+    fair_trade: 'Essa troca de pokémons é justa.'
+    not_fair_trade: 'Essa não é uma troca de pokémons justa.'
+    persist_success: 'Sua troca de pokémons foi registrada com sucesso.'
+    unknown_pokemons: 'Alguns pokémons não foram encontrados.' 
   helpers:
     select:
       prompt: Por favor selecione
@@ -230,9 +231,9 @@ pt-BR:
   trade:
     analyze: 'Analisar'
     experience: 'Experiência média'
-    offer_receive: 'Quais pokemons está recebendo?'
+    offer_receive: 'Quais pokémons está recebendo?'
     offer_receiving: 'Recebendo'
-    offer_send: 'Quais pokemons está oferecendo?'
+    offer_send: 'Quais pokémons está oferecendo?'
     offer_sending: 'Oferecendo'
     pokemon_name: 'Nome do pokémon'
     save: 'Salvar'

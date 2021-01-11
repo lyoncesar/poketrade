@@ -14,6 +14,8 @@ function hideSave() {
   elementHide("input.btn-primary");
   elementHide("#exchange_avg_receiving");
   elementHide("#exchange_avg_sending");
+  elementHide('.avg-receiving');
+  elementHide('.avg-sending');
 }
 
 function showSave(average_xp_receive = '', average_xp_send = '') {
