@@ -1,17 +1,20 @@
 <div class="container">
   <div class="row align-items-center">
-    <span class="alert alert-light analyzing align-self-center display-none"><%= t('flash.analyzing') %></span>
-    <span class="alert alert-success display-none"><%= t('flash.fair_trade') %></span>
-    <span class="alert alert-warning empty-list display-none"><%= t('flash.empty_list') %></span>
-    <span class="alert alert-danger display-none"><%= t('flash.not_fair_trade') %></span>
-    <span class="alert alert-warning unknown-pokemons display-none"><%= t('flash.unknown_pokemons')  %></span>
+    <span class="alert alert-light analyzing text-center display-none"><%= t('flash.analyzing') %></span>
+    <span class="alert alert-success text-center display-none"><%= t('flash.fair_trade') %></span>
+    <span class="alert alert-warning text-center empty-list display-none"><%= t('flash.empty_list') %></span>
+    <span class="alert alert-danger text-center display-none"><%= t('flash.not_fair_trade') %></span>
+    <span class="alert alert-warning text-center unknown-pokemons display-none"><%= t('flash.unknown_pokemons')  %></span>
   </div>
 
   <%= form_for @exchange do |form| %>
     <div class="row row-cols-auto justify-content-center">
       <div class="col-6">
-        <p><%= t('trade.offer_sending') %></p>
-        <span><%= t('trade.offer_send') %></span>
+        <p class="d-flex justify-content-center">
+          <%= t('trade.offer_sending') %>
+        </p>
+
+        <span class="d-flex justify-content-center"><%= t('trade.offer_send') %></span>
         <% 6.times do |n| %>
           <div class="g-3 align-items-center">
             <div class='col-auto'>
@@ -31,8 +34,10 @@
       </div>
 
       <div class="col-6">
-        <p><%= t('trade.offer_receiving') %></p>
-        <span><%= t('trade.offer_receive') %></span>
+        <p class="d-flex justify-content-center">
+          <%= t('trade.offer_receiving') %>
+        </p>
+        <span class="d-flex justify-content-center"><%= t('trade.offer_receive') %></span>
         <% 6.times do |n| %>
           <div class="g-3 align-items-center">
             <div class="col-auto">
