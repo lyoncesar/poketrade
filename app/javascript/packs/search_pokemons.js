@@ -27,8 +27,8 @@ function showAverages(average_xp_receive = '', average_xp_send = '') {
   setElementValue('#exchange_avg_receiving', average_xp_receive);
   setElementValue('#exchange_avg_sending', average_xp_send);
 
-  elementShow('#exchange_avg_receiving');
-  elementShow('#exchange_avg_sending');
+  elementShow('.avg-receiving');
+  elementShow('.avg-sending');
 }
 
 function fetch_pokemon() {
@@ -40,11 +40,11 @@ function fetch_pokemon() {
 
 
     if (sending.length === 0 || receiving.length === 0) {
-      elementHide("span.analising");
+      elementHide("span.analyzing");
       elementShow( "span.empty-list" );
     } else {
       $.post('/trade_validate', payload(sending, receiving), function(response) {
-        elementHide("span.analising");
+        elementHide("span.analyzing");
 
         if(response.data.unknown_pokemons.length === 0) {
 
@@ -66,7 +66,7 @@ function fetch_pokemon() {
 
 
 function toggleMessages() {
-  elementShow("span.analising");
+  elementShow("span.analyzing");
 
   elementHide("span.alert-success");
   elementHide("span.alert-warning");
