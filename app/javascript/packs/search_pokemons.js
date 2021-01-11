@@ -57,6 +57,7 @@ function fetch_pokemon() {
 
         } else {
           unknownPokemonsAlert(response.data.unknown_pokemons);
+          showAverages(response.data.average_xp_receive, response.data.average_xp_send);
         }
       }, "json");
     }
