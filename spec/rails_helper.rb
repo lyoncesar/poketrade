@@ -25,6 +25,6 @@ RSpec.configure do |config|
 end
 
 VCR.configure do |config|
-  config.cassette_libraty_dir = 'fixtures/cassettes'
+  config.cassette_library_dir = 'fixtures/cassettes'
   config.hook_into :webmock
 end
