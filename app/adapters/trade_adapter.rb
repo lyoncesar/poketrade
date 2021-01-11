@@ -11,6 +11,18 @@ class TradeAdapter
     filter_names(params.dig(:sending))
   end
 
+  def avg_receiving
+    return 0 if params.dig(:avg_receiving).blank?
+
+    params.dig(:avg_receiving)
+  end
+
+  def avg_sending
+    return 0 if params.dig(:avg_sending).blank?
+
+    params.dig(:avg_sending)
+  end
+
   private
 
   attr_reader :params

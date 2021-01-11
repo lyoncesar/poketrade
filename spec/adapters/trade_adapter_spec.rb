@@ -39,4 +39,52 @@ RSpec.describe TradeAdapter do
       expect(adapter.sending).to eq(['pikachu', 'farfetchd'])
     end
   end
+
+  context '#avg_receiving' do
+    let(:params) do
+      {
+        sending: ['Squirtle'],
+        receiving: ['Charmander'],
+        avg_receiving: '63',
+        avg_sending: '62'
+      }
+    end
+
+    it 'return the value received on params' do
+      adapter = described_class.new(params)
+
+      expect(adapter.avg_receiving).to eq('63')
+    end
+
+    it 'return a empty string if the param dont received' do
+      params.delete(:avg_receiving)
+
+      adapter = described_class.new(params)
+      expect(adapter.avg_receiving.zero?).to be_truthy
+    end
+  end
+
+  context '#avg_sending' do
+    let(:params) do
+      {
+        sending: ['Squirtle'],
+        receiving: ['Charmander'],
+        avg_receiving: '63',
+        avg_sending: '62'
+      }
+    end
+
+    it 'return the value received on params' do
+      adapter = described_class.new(params)
+
+      expect(adapter.avg_sending).to eq('62')
+    end
+
+    it 'return a empty string if the param dont received' do
+      params.delete(:avg_sending)
+
+      adapter = described_class.new(params)
+      expect(adapter.avg_sending.zero?).to be_truthy
+    end
+  end
 end
