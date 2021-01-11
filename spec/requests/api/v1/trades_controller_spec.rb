@@ -26,7 +26,9 @@ RSpec.describe 'Api::V1::Trades', type: :request do
     end
 
     it 'return a json with trade data' do
-      post trade_validate_path(params)
+      VCR.use_cassette('api_v1_trade_controller' ) do
+        post trade_validate_path(params)
+      end
 
       expect(response.body).to eq(
         {
@@ -97,7 +99,10 @@ RSpec.describe 'Api::V1::Trades', type: :request do
     it 'return a json talking if is a fair trade' do
       params.dig(:data, :sending).pop(4)
       params.dig(:data, :receiving).pop(4)
-      post trade_validate_path(params)
+
+      VCR.use_cassette('false_fair_trade') do
+        post trade_validate_path(params)
+      end
       
       fair_trade = JSON.parse(response.body).dig('data', 'fair_trade')
 
