@@ -158,6 +158,12 @@ pt-BR:
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
+  model:
+    id: 'Id'
+    received: 'Pokémons recebidos'
+    sended: 'Pokémons enviados'
+    avg_sended: 'Experiência média enviada'
+    avg_received: 'Experiência média recebida'
   number:
     currency:
       format:
@@ -216,6 +222,11 @@ pt-BR:
     precision:
       format:
         delimiter: "."
+  pages:
+    index:
+      title: 'Histórico de trocas'
+      h1: 'Histórico de trocas de pokémons'
+    new_exchange: 'Trocar pokémons'
   support:
     array:
       last_word_connector: " e "
