@@ -15,7 +15,6 @@ class ExchangesController < ApplicationController
       @create_trade = CreateTradeService.new(adapter)
 
       if @create_trade.call
-        binding.pry
         TradeMailer.with(trade: @create_trade.trade).new_email.deliver_later
 
         flash[:success] = I18n.t('flash.persist_success')
