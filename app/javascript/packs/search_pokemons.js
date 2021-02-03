@@ -1,17 +1,34 @@
 $(document).ready(function(){
   fetch_pokemon();
   cantSave();
+  addField();
 })
 
+var allowSubmit = false;
+
+function addField() {
+  $('#add_send_field').click(function(envent) {
+      event.preventDefault();
+      $('input.sending.display-none').first().removeClass('display-none');
+    }
+  );
+
+  $('#add_receive_field').click(function(envent) {
+      event.preventDefault();
+      $('input.receiving.display-none').first().removeClass('display-none');
+    }
+  );
+}
+
 function cantSave(){
-  $("input").keydown(function(event) {
+  $("input:text").keydown(function(event) {
     hideSave();
   });
 }
 
 function hideSave() {
   elementHide("span.alert-success");
-  elementHide("input.btn-primary");
+  elementHide("input.btn-save");
   elementHide("#exchange_avg_receiving");
   elementHide("#exchange_avg_sending");
   elementHide('.avg-receiving');
@@ -20,9 +37,10 @@ function hideSave() {
 
 function showSave(average_xp_receive = '', average_xp_send = '') {
   elementShow("span.alert-success");
-  elementShow("input.btn-primary");
+  elementShow("input.btn-save");
 
   showAverages(average_xp_receive, average_xp_send);
+  allowSubmit = true;
 }
 
 function showAverages(average_xp_receive = '', average_xp_send = '') {
@@ -34,7 +52,8 @@ function showAverages(average_xp_receive = '', average_xp_send = '') {
 }
 
 function fetch_pokemon() {
-  $(".btn-link").on("click", function(event) {
+  $("#btn_analyze").on("click", function(event) {
+    event.preventDefault();
     toggleMessages();
 
     const sending =  pokemonsList(".sending");
@@ -74,7 +93,7 @@ function toggleMessages() {
   elementHide("span.alert-warning");
   elementHide("span.alert-danger");
   elementHide("span.unknown-pokemons");
-  elementHide("input.btn-primary");
+  elementHide("input.btn-save");
   elementHide("#exchange_avg_receiving");
   elementHide("#exchange_avg_sending");
 

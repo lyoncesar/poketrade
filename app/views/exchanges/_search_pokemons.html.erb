@@ -1,63 +1,146 @@
-<div class="container">
+<div class="container p-0 vh-75">
   <div class="row align-items-center">
-    <span class="alert alert-light analyzing text-center display-none"><%= t('flash.analyzing') %></span>
+    <span class="alert alert-light analyzing text-center m-1 display-none"><%= t('flash.analyzing') %></span>
     <span class="alert alert-success text-center display-none"><%= t('flash.fair_trade') %></span>
     <span class="alert alert-warning text-center empty-list display-none"><%= t('flash.empty_list') %></span>
     <span class="alert alert-danger text-center display-none"><%= t('flash.not_fair_trade') %></span>
     <span class="alert alert-warning text-center unknown-pokemons display-none"><%= t('flash.unknown_pokemons')  %></span>
   </div>
 
-  <%= form_for @exchange do |form| %>
-    <div class="row row-cols-auto justify-content-center">
-      <div class="col-6">
-        <p class="d-flex justify-content-center">
-          <%= t('trade.offer_sending') %>
-        </p>
+  <div class="border shadow p-5 my-3 bg-white rounded m-0 min-vh-50">
+    <%= form_for @exchange do |form| %>
+      <div class="row row-cols-auto justify-content-center">
+        <div class="col-6">
+          <p class="fs-4 fw-bold d-flex justify-content-center">
+            <%= t('trade.offer_sending') %>
+          </p>
+          <span class="text-secondary d-flex justify-content-center"><%= t('trade.offer_send') %></span>
+        </div>
 
-        <span class="d-flex justify-content-center"><%= t('trade.offer_send') %></span>
-        <% 6.times do |n| %>
-          <div class="g-3 align-items-center">
-            <div class='col-auto'>
-              <div class="">
-                <%= form.text_field "sending", placeholder: t('trade.pokemon_name'), multiple: true, class:'form-control sending' %>
-              </div>
-            </div>
+        <div class="col-6">
+          <p class="fs-4 fw-bold d-flex justify-content-center">
+            <%= t('trade.offer_receiving') %>
+          </p>
+          <span class="text-secondary d-flex justify-content-center"><%= t('trade.offer_receive') %></span>
+        </div>
+      </div>
+
+      <div class="row row-cols-auto">
+        <div class="sending-field d-flex justify-content-start col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "sending", id: 'exchange_sending_0', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control sending' %>
           </div>
-        <% end %>
+        </div>
 
-        <div class='mb-3 row avg-sending display-none d-flex align-items-start'>
-          <%= form.label t('trade.experience'), class: 'avg-sending col-sm-5 col-form-label display-none' %>
-          <div class="col-sm-7">
-            <%= form.text_field 'avg_sending', class: 'form-control-plaintext avg-sending display-none' %>
+        <div class="receiving-field d-flex justify-content-end col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "receiving", id: 'exchange_receiving_0', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control receiving' %>
           </div>
         </div>
       </div>
 
-      <div class="col-6">
-        <p class="d-flex justify-content-center">
-          <%= t('trade.offer_receiving') %>
-        </p>
-        <span class="d-flex justify-content-center"><%= t('trade.offer_receive') %></span>
-        <% 6.times do |n| %>
-          <div class="g-3 align-items-center">
-            <div class="col-auto">
-              <%= form.text_field "receiving", placeholder: t('trade.pokemon_name'), multiple: true, class:'form-control receiving' %>
-            </div>
+      <div class="row row-cols-auto new-field">
+        <div class="sending-field d-flex justify-content-start col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "sending", id:'exchange_sending_1', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control sending display-none' %>
           </div>
-        <% end %>
+        </div>
 
-        <div class='mb-3 row avg-receiving display-none d-flex align-items-start'>
-          <%= form.label t('trade.experience'), class: 'avg-receiving col-sm-5 col-form-label display-none' %>
-          <div class="col-sm-7">
-            <%= form.text_field 'avg_receiving', class: 'form-control-plaintext avg-receiving display-none' %>
+        <div class="receiving-field d-flex justify-content-end col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "receiving", id: 'exchange_receiving_1', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control receiving display-none' %>
           </div>
         </div>
       </div>
-    </div>  
 
-    <div class="row">
-      <p class='btn btn-link'><%= t('trade.analyze') %></p>
-      <%= form.submit t('trade.save'), class:'btn btn-primary display-none' %>
-    </div>
-  <% end %>
+      <div class="row row-cols-auto new-field">
+        <div class="sending-field d-flex justify-content-start col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "sending", id:'exchange_sending_2', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control sending display-none' %>
+          </div>
+        </div>
+
+        <div class="receiving-field d-flex justify-content-end col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "receiving", id: 'exchange_receiving_2', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control receiving display-none' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-cols-auto new-field">
+        <div class="sending-field d-flex justify-content-start col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "sending", id:'exchange_sending_3', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control sending display-none' %>
+          </div>
+        </div>
+
+        <div class="receiving-field d-flex justify-content-end col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "receiving", id: 'exchange_receiving_3', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control receiving display-none' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-cols-auto new-field">
+        <div class="sending-field d-flex justify-content-start col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "sending", id:'exchange_sending_4', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control sending display-none' %>
+          </div>
+        </div>
+
+        <div class="receiving-field d-flex justify-content-end col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "receiving", id: 'exchange_receiving_4', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control receiving display-none' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-cols-auto new-field">
+        <div class="sending-field d-flex justify-content-start col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "sending", id:'exchange_sending_5', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control sending display-none' %>
+          </div>
+        </div>
+
+        <div class="receiving-field d-flex justify-content-end col-6">
+          <div class="g-3 align-items-center my-2">
+            <%= form.text_field "receiving", id: 'exchange_receiving_5', placeholder: t('trade.pokemon_name'), multiple: true, class:'col-6 form-control receiving display-none' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-cols-auto">
+        <div class="col-6">
+          <div class='mb-3 row avg-sending display-none d-flex align-items-start'>
+            <%= form.label t('trade.experience'), class: 'avg-sending col-sm-5 col-form-label display-none' %>
+            <div class="col-sm-7">
+              <%= form.text_field 'avg_sending', class: 'form-control-plaintext avg-sending display-none' %>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button id="add_send_field" class="btn btn-sm btn-primary"><%= t('pages.new_exchange.add_pokemon') %></button>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class='mb-3 row avg-receiving display-none d-flex align-items-start'>
+            <%= form.label t('trade.experience'), class: 'avg-receiving col-sm-5 col-form-label display-none' %>
+            <div class="col-sm-7">
+              <%= form.text_field 'avg_receiving', class: 'form-control-plaintext avg-receiving display-none' %>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button id="add_receive_field" class="btn btn-primary btn-sm"><%= t('pages.new_exchange.add_pokemon') %></button>
+          </div>
+        </div>
+      </div>  
+
+      <div class="row">
+        <button id="btn_analyze" class='btn btn-link my-3'><%= t('trade.analyze') %></button>
+        <%= form.submit t('trade.save'), class:'btn btn-primary btn-save my-1 display-none' %>
+      </div>
+    <% end %>
+  </div>
 </div>

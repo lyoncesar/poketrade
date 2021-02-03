@@ -1,11 +1,11 @@
 <div class="container">
   <div>
-    <h1 class="d-flex justify-content-center">Teste</h1>
+    <h1 class="d-flex justify-content-center m-4"><%= t('pages.new_exchange.title') %></h1>
   </div>
 
   <div>
-    <div class="row d-flex">
-      <%= link_to t('pages.index.title'), exchanges_path, class: 'd-flex justify-content-end' %>
+    <div class="row d-flex align-items-end mb-3">
+      <%= link_to t('pages.index.title'), exchanges_path, class: '' %>
     </div>
     <%= render 'search_pokemons' %>
   </div>

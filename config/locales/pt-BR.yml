@@ -226,7 +226,9 @@ pt-BR:
     index:
       title: 'Histórico de trocas'
       h1: 'Histórico de trocas de pokémons'
-    new_exchange: 'Trocar pokémons'
+    new_exchange:
+      title: 'Trocar pokémons'
+      add_pokemon: 'Adicionar pokémon'
   support:
     array:
       last_word_connector: " e "
