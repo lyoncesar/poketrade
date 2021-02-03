@@ -14,7 +14,7 @@ class CreateTradeService
   private
 
   attr_reader :params
-  
+
   def create_trade
     @trade = Exchange.new(build_trade)
 
@@ -26,7 +26,9 @@ class CreateTradeService
       avg_receiving: params.avg_receiving,
       avg_sending: params.avg_sending,
       receiving: filter_list(params.receiving),
-      sending: filter_list(params.sending)
+      sending: filter_list(params.sending),
+      coach_name: 'Lyon Oliveira',
+      coach_email: 'lyoncesar@gmail.com'
     }
   end
 
