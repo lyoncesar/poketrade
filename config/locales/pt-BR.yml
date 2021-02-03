@@ -17,7 +17,7 @@ pt-BR:
     - sex
     - sáb
     abbr_month_names:
-    - 
+    -
     - jan
     - fev
     - mar
@@ -43,7 +43,7 @@ pt-BR:
       long: "%d de %B de %Y"
       short: "%d de %B"
     month_names:
-    - 
+    -
     - janeiro
     - fevereiro
     - março
@@ -150,7 +150,7 @@ pt-BR:
     fair_trade: 'Essa troca de pokémons é justa.'
     not_fair_trade: 'Essa não é uma troca de pokémons justa.'
     persist_success: 'Sua troca de pokémons foi registrada com sucesso.'
-    unknown_pokemons: 'Alguns pokémons não foram encontrados.' 
+    unknown_pokemons: 'Alguns pokémons não foram encontrados.'
   helpers:
     select:
       prompt: Por favor selecione
@@ -158,6 +158,10 @@ pt-BR:
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
+  mailers:
+    trade:
+      new_email:
+        subject: 'Sua troca de pokémons foi registrada \o/'
   model:
     id: 'Id'
     received: 'Pokémons recebidos'
@@ -250,3 +254,9 @@ pt-BR:
     offer_sending: 'Oferecendo'
     pokemon_name: 'Nome do pokémon'
     save: 'Salvar'
+  views:
+    mailers:
+      trade_mailer:
+        new_email:
+          title: "Parabéns %{coach}"
+          text: 'Sua troca de Pokémons já está disponível para consulta no nosso sistema.'
