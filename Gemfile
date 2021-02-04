@@ -15,6 +15,7 @@ gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 
 group :development, :test do
+  gem 'letter_opener'
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'vcr'
