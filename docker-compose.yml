@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  db:
+    image: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: poketrade
+      POSTGRES_PASSWORD: password
+    restart: always
+    expose:
+      - '5432'
+  web:
+    user: '${UID}'
+    build:
+      context: .
+    command: 'bundle exec rails s -b 0.0.0.0'
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+volumes:
+  bundle_cache:
+  pgdata:

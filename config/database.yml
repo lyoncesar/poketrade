@@ -3,16 +3,15 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: poketrade
-  password: password
+  password: 'password'
+  host: db
 
 development:
   <<: *default
-  host: localhost
   database: poketrade_development
 
 test:
   <<: *default
-  host: localhost
   database: poketrade_test
 
 production:
