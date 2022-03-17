@@ -68,7 +68,9 @@ RSpec.describe CreateTradeService do
       service = described_class.new(adapter)
       service.call
 
-      expect(service.trade.errors.messages).to eq({:avg_sending=>["can't be blank"]})
+      expect(service.trade.errors.messages).to eq(
+        avg_sending: ['não pode ficar em branco']
+      )
     end
   end
 end

@@ -31,7 +31,7 @@ RSpec.describe Filter::PokemonsService do
       end
 
       before do
-        allow_any_instance_of(PokeApi::Client).to receive(:get) { nil }
+        allow_any_instance_of(PokemonApi::Client).to receive(:get) { nil }
       end
 
       it 'returns the name on not_found attribute' do

@@ -4,7 +4,7 @@ module Filter
   # Fetch pokemons on external api
   class PokemonsService
 
-    def initialize(pokemons: [], poke_api_client: PokeApi::Client.new())
+    def initialize(pokemons: [], poke_api_client: PokemonApi::Client.new())
       @pokemons = pokemons
       @poke_api_client = poke_api_client
       @unknown_list = []

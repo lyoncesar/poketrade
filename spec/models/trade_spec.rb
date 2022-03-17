@@ -17,13 +17,13 @@ RSpec.describe Exchange, type: :model do
       expect{trade.save}.to change{Exchange.count}.by(1)
     end
 
-    it "returns error if any parameter is missing" do
+    it 'returns error if any parameter is missing' do
       params.delete(:sending)
 
       trade = described_class.new(params)
       trade.save
 
-      expect(trade.errors.messages).to eq({ :sending=>["can't be blank"] })
+      expect(trade.errors.messages).to eq(sending: ['não pode ficar em branco'])
     end
   end
 end

@@ -2,7 +2,7 @@
 
 require 'poke-api-v2'
 
-module PokeApi
+module PokemonApi
   class Client
     def get(pokemon)
       PokeApi.get(pokemon: pokemon)
