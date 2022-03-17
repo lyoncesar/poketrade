@@ -7,9 +7,10 @@ module Api
         contract = TradeContract.new.call(trade_params.to_h)
 
         if contract.errors.blank?
-          adapter = TradeAdapter.new(contract.to_h)
-          @pokemons_list = FetchPokemonsService.new(adapter)
-        
+          trade = TradeAdapter.new(contract.to_h)
+          sent_pokemons = Filter::PokemonsService.new(pokemons: trade.sending).call
+          received_pokemons = Filter::PokemonsService.new(pokemons: trade.receiving).call
+
           begin
             @trade_report = TradePolicy.new(@pokemons_list).call
           rescue
